@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Jardín en Casa — Tu Huerta Orgánica en Casa</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep:   #1A3A1F;
+    --green-mid:    #2D6A35;
+    --green-fresh:  #4CAF6A;
+    --green-light:  #A8D5B5;
+    --cream:        #F8F4EE;
+    --earth:        #8B5E3C;
+    --earth-light:  #C4956A;
+    --white:        #FFFFFF;
+    --text-dark:    #1A1A1A;
+    --text-mid:     #4A4A4A;
+    --text-light:   #7A7A7A;
+    --section-alt:  #F2F6F2;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  .display { font-family: 'Fraunces', serif; }
+
+  .section-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    background: #D6EDDA;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+  }
+
+  /* ── URGENCY BAR ── */
+  #urgency-bar {
+    background: var(--green-deep);
+    color: #fff;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  #urgency-bar span { color: var(--green-fresh); }
+  #urgency-date { color: var(--earth-light); font-weight: 700; }
+
+  /* ── HERO ── */
+  #hero {
+    background: linear-gradient(160deg, var(--green-deep) 0%, #0F2413 100%);
+    color: #fff;
+    text-align: center;
+    padding: 72px 20px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(76,175,106,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--green-fresh);
+    background: rgba(76,175,106,.15);
+    border: 1px solid rgba(76,175,106,.3);
+    padding: 5px 16px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  .hero-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(38px, 6vw, 68px);
+    font-weight: 900;
+    line-height: 1.06;
+    max-width: 820px;
+    margin: 0 auto 20px;
+  }
+  .hero-headline em { font-style: italic; color: var(--green-fresh); }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 19px);
+    color: rgba(255,255,255,.72);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+
+  /* hero image */
+  .hero-img-wrap {
+    margin: 0 auto 44px;
+    max-width: 560px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.07) inset;
+  }
+  .hero-img-wrap img { width: 100%; display: block; }
+
+  /* stat badges */
+  .stat-badges {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .stat-badge {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(76,175,106,.3);
+    border-radius: 14px;
+    padding: 14px 22px;
+    min-width: 110px;
+  }
+  .stat-num {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--green-fresh);
+    line-height: 1;
+  }
+  .stat-label {
+    display: block;
+    font-size: 11px;
+    color: rgba(255,255,255,.55);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* CTA */
+  .btn-main {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--green-fresh), #38A85A);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 18px 44px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    letter-spacing: .02em;
+    box-shadow: 0 8px 28px rgba(76,175,106,.45);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn-main:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(76,175,106,.55); }
+  .btn-meta { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,.5); }
+  .btn-meta span { color: rgba(255,255,255,.75); }
+
+  .trust-row {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    font-size: 13px;
+    color: rgba(255,255,255,.55);
+  }
+  .trust-row i { color: var(--green-fresh); margin-right: 5px; }
+
+  /* ── WHAT YOU GET ── */
+  #what-you-get {
+    background: var(--cream);
+    padding: 88px 20px;
+    text-align: center;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 900;
+    line-height: 1.12;
+    margin-bottom: 12px;
+    color: var(--green-deep);
+  }
+  .section-desc {
+    font-size: 17px;
+    color: var(--text-mid);
+    max-width: 540px;
+    margin: 0 auto 52px;
+    line-height: 1.6;
+  }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto 48px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: left;
+    border: 1.5px solid rgba(0,0,0,.06);
+    box-shadow: 0 2px 16px rgba(0,0,0,.05);
+  }
+  .card-icon { font-size: 26px; margin-bottom: 14px; }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    margin-bottom: 8px;
+  }
+  .card-body { font-size: 14px; color: var(--text-mid); line-height: 1.55; }
+
+  /* ── WHY IT WORKS ── */
+  #why-works {
+    background: var(--green-deep);
+    color: #fff;
+    padding: 88px 20px;
+    text-align: center;
+  }
+  #why-works .section-label { color: var(--green-fresh); background: rgba(76,175,106,.18); }
+  #why-works .section-title { color: #fff; }
+  #why-works .section-desc { color: rgba(255,255,255,.6); }
+  #why-works .card { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); box-shadow: none; }
+  #why-works .card-title { color: var(--green-fresh); }
+  #why-works .card-body { color: rgba(255,255,255,.7); }
+
+  /* ── BONUSES ── */
+  #bonuses {
+    background: var(--section-alt);
+    padding: 88px 20px;
+    text-align: center;
+  }
+  .bonus-total-badge {
+    display: inline-block;
+    background: #fff;
+    border: 2px solid var(--green-mid);
+    color: var(--green-deep);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 100px;
+    margin-top: 40px;
+  }
+  .bonus-total-badge s { color: var(--text-light); font-weight: 400; margin-right: 4px; }
+  .bonus-total-badge strong { color: var(--green-mid); }
+  .bonus-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 720px;
+    margin: 44px auto 0;
+  }
+  .bonus-item {
+    background: #fff;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px;
+    border: 1.5px solid rgba(0,0,0,.07);
+    text-align: left;
+    box-shadow: 0 2px 14px rgba(0,0,0,.05);
+  }
+  .bonus-number {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--green-mid);
+    color: #fff;
+    font-weight: 800;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bonus-cover {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,.15);
+  }
+  .bonus-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bonus-info { flex: 1; }
+  .bonus-title { font-size: 16px; font-weight: 700; color: var(--green-deep); margin-bottom: 6px; }
+  .bonus-desc { font-size: 13px; color: var(--text-mid); line-height: 1.5; margin-bottom: 10px; }
+  .bonus-price s { font-size: 13px; color: var(--text-light); margin-right: 6px; }
+  .bonus-price strong { font-size: 13px; color: var(--green-mid); font-weight: 700; }
+
+  /* ── PURCHASE ── */
+  #purchase {
+    background: #0F2413;
+    color: #fff;
+    padding: 88px 20px;
+    text-align: center;
+  }
+  .offer-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--earth-light);
+    background: rgba(196,149,106,.15);
+    border: 1px solid rgba(196,149,106,.3);
+    padding: 5px 16px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .countdown-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 24px auto;
+  }
+  .countdown-block {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 10px;
+    padding: 14px 20px;
+    min-width: 72px;
+  }
+  .countdown-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--green-fresh);
+    line-height: 1;
+    display: block;
+  }
+  .countdown-label {
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.4);
+    display: block;
+    margin-top: 4px;
+  }
+  .countdown-sep { font-size: 28px; color: rgba(255,255,255,.3); align-self: center; margin-bottom: 8px; }
+  .price-box {
+    background: rgba(255,255,255,.06);
+    border: 1.5px solid rgba(76,175,106,.25);
+    border-radius: 20px;
+    padding: 40px 36px;
+    max-width: 460px;
+    margin: 32px auto 0;
+  }
+  .price-old { font-size: 17px; color: rgba(255,255,255,.35); text-decoration: line-through; margin-bottom: 4px; }
+  .price-new { font-family: 'Fraunces', serif; font-size: 72px; font-weight: 900; color: var(--green-fresh); line-height: 1; margin-bottom: 6px; }
+  .price-note { font-size: 13px; color: rgba(255,255,255,.45); margin-bottom: 28px; }
+  .checklist { list-style: none; text-align: left; margin-bottom: 28px; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: rgba(255,255,255,.8);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-icon { color: var(--green-fresh); flex-shrink: 0; margin-top: 1px; }
+  .purchase-meta { font-size: 12px; color: rgba(255,255,255,.35); margin-top: 10px; }
+
+  /* ── SOCIAL PROOF ── */
+  #social-proof {
+    background: var(--cream);
+    padding: 88px 20px;
+    text-align: center;
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 980px;
+    margin: 48px auto;
+  }
+  .review-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    text-align: left;
+    border: 1.5px solid rgba(0,0,0,.06);
+    box-shadow: 0 2px 12px rgba(0,0,0,.05);
+  }
+  .stars { color: #F5A623; font-size: 15px; margin-bottom: 12px; letter-spacing: 2px; }
+  .review-text { font-size: 14px; color: var(--text-mid); line-height: 1.6; margin-bottom: 18px; font-style: italic; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .reviewer-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid var(--green-light);
+  }
+  .reviewer-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .reviewer-name { font-weight: 700; font-size: 14px; color: var(--text-dark); }
+  .reviewer-city { font-size: 12px; color: var(--text-light); }
+
+  /* ── GUARANTEE ── */
+  #guarantee {
+    background: var(--section-alt);
+    padding: 88px 20px;
+  }
+  .guarantee-box {
+    max-width: 620px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    padding: 48px 40px;
+    text-align: center;
+    border: 2px dashed var(--green-light);
+  }
+  .guarantee-icon { font-size: 52px; margin-bottom: 16px; }
+  .guarantee-title { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 900; color: var(--green-deep); margin-bottom: 14px; }
+  .guarantee-text { font-size: 15px; color: var(--text-mid); line-height: 1.65; margin-bottom: 24px; }
+  .guarantee-list { list-style: none; text-align: left; display: inline-block; }
+  .guarantee-list li { font-size: 14px; color: var(--text-mid); padding: 5px 0; }
+  .guarantee-list li::before { content: '✓ '; color: var(--green-mid); font-weight: 700; }
+
+  /* ── FAQ ── */
+  #faq { background: var(--cream); padding: 88px 20px; text-align: center; }
+  .faq-list {
+    max-width: 640px;
+    margin: 48px auto 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .faq-item {
+    background: #fff;
+    border-radius: 12px;
+    border: 1.5px solid rgba(0,0,0,.07);
+    overflow: hidden;
+  }
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: left;
+    gap: 12px;
+  }
+  .faq-arrow {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--green-mid);
+    color: #fff;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s;
+  }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height .3s ease; font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+  .faq-item.open .faq-answer { max-height: 200px; }
+  .faq-answer-inner { padding: 0 24px 18px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green-deep);
+    color: rgba(255,255,255,.45);
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 13px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .bonus-item { flex-direction: column; align-items: flex-start; }
+    .price-box { padding: 32px 24px; }
+    .price-new { font-size: 56px; }
+    .guarantee-box { padding: 36px 24px; }
+    .bonus-cover { width: 80px; height: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── URGENCY BAR ── -->
+<div id="urgency-bar">
+  🌱 OFERTA LIMITADA — <span>SOLO HOY</span> · <span id="urgency-date"></span>
+</div>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-eyebrow">✦ Guía completa paso a paso · +30 variedades</div>
+  <h1 class="hero-headline display">
+    Más de 30 Variedades<br>para tu <em>Huerta Orgánica</em><br>en Casa
+  </h1>
+  <p class="hero-sub">
+    El método paso a paso para cosechar verduras, hierbas y flores 100% orgánicas en tu propia casa — gastando muy poco y sin experiencia previa.
+  </p>
+
+  <div class="hero-img-wrap">
+    <img src="HERO.webp" alt="Mi Jardín en Casa — guía completa con más de 30 variedades orgánicas">
+  </div>
+
+  <div class="stat-badges">
+    <div class="stat-badge"><span class="stat-num">30+</span><span class="stat-label">Variedades</span></div>
+    <div class="stat-badge"><span class="stat-num">100%</span><span class="stat-label">Orgánico</span></div>
+    <div class="stat-badge"><span class="stat-num">0</span><span class="stat-label">Experiencia necesaria</span></div>
+  </div>
+
+  <div>
+    <a href="#purchase" class="btn-main">¡QUIERO EMPEZAR AHORA!</a>
+    <p class="btn-meta">🔒 Acceso inmediato · <span>Solo $9,90 USD</span></p>
+  </div>
+
+  <div class="trust-row">
+    <span><i>✓</i> 7 días de garantía</span>
+    <span><i>✓</i> Acceso vitalicio</span>
+    <span><i>✓</i> 100% digital</span>
+  </div>
+</section>
+
+<!-- ── WHAT YOU GET ── -->
+<section id="what-you-get">
+  <span class="section-label">El Contenido</span>
+  <h2 class="section-title display">Lo Que Vas a Recibir</h2>
+  <p class="section-desc">Una guía completa con más de 30 variedades orgánicas, organizadas para que cosechas mucho gastando muy poco.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🌱</div>
+      <p class="card-title">+30 variedades orgánicas</p>
+      <p class="card-body">Hierbas, verduras y flores 100% orgánicas, sin químicos ni pesticidas. Todo explicado paso a paso.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌱</div>
+      <p class="card-title">Todos los niveles</p>
+      <p class="card-body">Desde nunca haber tocado tierra hasta tener tu huerto completo en producción. Sin presión.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <p class="card-title">Acceso digital</p>
+      <p class="card-body">En tu celular, tablet o computadora. Disponible cuando quieras, desde donde estés.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">👨‍🌾</div>
+      <p class="card-title">Contenido profesional</p>
+      <p class="card-body">Desarrollado por especialistas en cultivo urbano con años de experiencia práctica.</p>
+    </div>
+  </div>
+
+  <a href="#purchase" class="btn-main">¡QUIERO ACCEDER AHORA!</a>
+  <p class="btn-meta" style="color:#7A7A7A; margin-top:10px;">🔒 Acceso inmediato · Solo $9,90</p>
+</section>
+
+<!-- ── WHY IT WORKS ── -->
+<section id="why-works">
+  <span class="section-label">Beneficios</span>
+  <h2 class="section-title display">Gastando Poco,<br>Cosechando Mucho</h2>
+  <p class="section-desc">Diseñado para quien nunca cultivó nada y quiere comida orgánica en casa sin gastar mucho.</p>
+
+  <div class="cards-grid" style="max-width:900px;margin:0 auto 48px;">
+    <div class="card">
+      <div class="card-icon">🌿</div>
+      <p class="card-title">100% orgánico</p>
+      <p class="card-body">Sin químicos, sin pesticidas. Verduras y hierbas naturales, cultivadas por ti, en tu propia casa.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💰</div>
+      <p class="card-title">Gastando muy poco</p>
+      <p class="card-body">Con macetas básicas y semillas económicas ya tienes todo lo necesario para empezar.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📈</div>
+      <p class="card-title">+30 variedades para elegir</p>
+      <p class="card-body">Hierbas, verduras y flores. Empieza con las que más te gusten y expande tu huerta poco a poco.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏠</div>
+      <p class="card-title">Sin jardín ni espacio extra</p>
+      <p class="card-body">Un patio, balcón, terraza o ventana — cualquier espacio sirve. El método se adapta a lo que tengas.</p>
+    </div>
+  </div>
+
+  <a href="#purchase" class="btn-main">¡QUIERO ACCEDER AHORA!</a>
+  <p class="btn-meta" style="color:rgba(255,255,255,.4); margin-top:10px;">🔒 Acceso inmediato · Solo $9,90</p>
+</section>
+
+<!-- ── BONUSES ── -->
+<section id="bonuses">
+  <span class="section-label">Bonos Exclusivos — Valor $21</span>
+  <h2 class="section-title display">¡Recibe 3 Bonos <span style="color:var(--green-mid)">GRATIS</span>!</h2>
+  <p class="section-desc">Materiales extra que van a acelerar tu evolución como cultivador urbano.</p>
+
+  <div class="bonus-list">
+
+    <div class="bonus-item">
+      <div class="bonus-number">1</div>
+      <div class="bonus-cover">
+        <img src="BONUS_1.webp" alt="Guía de Hierbas Aromáticas">
+      </div>
+      <div class="bonus-info">
+        <p class="bonus-title">Guía de Hierbas Aromáticas</p>
+        <p class="bonus-desc">Albahaca, cilantro, perejil, menta y más. Cuándo y cómo cosechar para el máximo sabor. Usos culinarios y medicinales para cada planta.</p>
+        <p class="bonus-price"><s>$7</s> <strong>HOY: GRATIS</strong></p>
+      </div>
+    </div>
+
+    <div class="bonus-item">
+      <div class="bonus-number">2</div>
+      <div class="bonus-cover">
+        <img src="BONUS_2.webp" alt="Calendario de Siembra y Cuidados">
+      </div>
+      <div class="bonus-info">
+        <p class="bonus-title">Calendario de Siembra y Cuidados</p>
+        <p class="bonus-desc">Planifica el año entero. Qué plantar cada mes, cuándo regar, abonar y trasplantar según el clima de tu región.</p>
+        <p class="bonus-price"><s>$7</s> <strong>HOY: GRATIS</strong></p>
+      </div>
+    </div>
+
+    <div class="bonus-item">
+      <div class="bonus-number">3</div>
+      <div class="bonus-cover">
+        <img src="BONUS_3.webp" alt="Manual de Plantas Decorativas">
+      </div>
+      <div class="bonus-info">
+        <p class="bonus-title">Manual de Plantas Decorativas</p>
+        <p class="bonus-desc">Flores y plantas ornamentales que embellecen tu espacio. Combinaciones de colores, cuidados básicos y cómo renovar tu decoración con naturaleza viva.</p>
+        <p class="bonus-price"><s>$7</s> <strong>HOY: GRATIS</strong></p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bonus-total-badge">
+    Total en bonos: <s>$21</s> — <strong>¡HOY GRATIS!</strong>
+  </div>
+</section>
+
+<!-- ── PURCHASE ── -->
+<section id="purchase">
+  <div class="offer-label">OFERTA LIMITADA — TERMINA EN:</div>
+
+  <div class="countdown-wrap">
+    <div class="countdown-block">
+      <span class="countdown-num" id="cd-hours">00</span>
+      <span class="countdown-label">Horas</span>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-block">
+      <span class="countdown-num" id="cd-mins">12</span>
+      <span class="countdown-label">Minutos</span>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-block">
+      <span class="countdown-num" id="cd-secs">00</span>
+      <span class="countdown-label">Segundos</span>
+    </div>
+  </div>
+
+  <div class="price-box">
+    <p class="price-old">$29,90 USD</p>
+    <p class="price-new display">$9,90</p>
+    <p class="price-note">USD · pago único · acceso vitalicio</p>
+    <ul class="checklist">
+      <li><span class="check-icon">✓</span> +30 variedades orgánicas para cultivar</li>
+      <li><span class="check-icon">✓</span> Método completo Mi Jardín en Casa</li>
+      <li><span class="check-icon">✓</span> Hierbas, comestibles y flores decorativas</li>
+      <li><span class="check-icon">✓</span> Acceso inmediato y vitalicio</li>
+      <li><span class="check-icon">✓</span> Bono 1: Guía de Hierbas Aromáticas</li>
+      <li><span class="check-icon">✓</span> Bono 2: Calendario de Siembra y Cuidados</li>
+      <li><span class="check-icon">✓</span> Bono 3: Manual de Plantas Decorativas</li>
+      <li><span class="check-icon">✓</span> Garantía incondicional de 7 días</li>
+    </ul>
+    <a href="https://pay.hotmart.com/E106386776F?off=khvcu8pw&checkoutMode=10" class="btn-main" style="width:100%;text-align:center;display:block;">¡QUIERO ACCESO COMPLETO AHORA!</a>
+    <p class="purchase-meta">🔒 Compra 100% segura · Garantía de 7 días</p>
+  </div>
+</section>
+
+<!-- ── SOCIAL PROOF ── -->
+<section id="social-proof">
+  <span class="section-label">Testimonios Reales</span>
+  <h2 class="section-title display">Lo Que Dicen Quienes<br>Ya Están Cultivando</h2>
+
+  <div class="reviews-grid">
+
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"No tenía idea de que se podían cultivar tantas variedades orgánicas en un espacio tan pequeño. Empecé con tres macetas y hoy tengo tomates cherry, albahaca y cilantro sin gastar casi nada."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">
+          <img src="FT_1.webp" alt="Ana María Delgado">
+        </div>
+        <div>
+          <p class="reviewer-name">Ana María Delgado</p>
+          <p class="reviewer-city">Ciudad de México</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Nunca había cultivado nada en mi vida y pensé que jamás podría tener algo orgánico en casa. Seguí el método paso a paso y en dos semanas ya cosechaba mis primeras hierbas, gastando muy poco."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">
+          <img src="FT_2.webp" alt="Carmen Restrepo">
+        </div>
+        <div>
+          <p class="reviewer-name">Carmen Restrepo</p>
+          <p class="reviewer-city">Bogotá</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Más de 30 variedades para elegir y todo orgánico, sin químicos. Los bonos valen el precio completo. El calendario de siembra fue lo que me hizo entender cuándo plantar cada cosa."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">
+          <img src="FT_3.webp" alt="Patricia Núñez">
+        </div>
+        <div>
+          <p class="reviewer-name">Patricia Núñez</p>
+          <p class="reviewer-city">Buenos Aires</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <a href="#purchase" class="btn-main">¡QUIERO MI HUERTA ORGÁNICA!</a>
+  <p class="btn-meta" style="color:#7A7A7A; margin-top:10px;">🔒 Acceso inmediato · Solo $9,90</p>
+</section>
+
+<!-- ── GUARANTEE ── -->
+<section id="guarantee">
+  <div class="guarantee-box">
+    <div class="guarantee-icon">🛡️</div>
+    <h2 class="guarantee-title display">Garantía Incondicional de 7 Días</h2>
+    <p class="guarantee-text">Accede al material completo por 7 días. Si por cualquier motivo no quedas satisfecho, te devolvemos el 100% de tu dinero. Sin preguntas, sin burocracia.</p>
+    <ul class="guarantee-list">
+      <li>Devolución rápida y sin burocracia</li>
+      <li>Sin preguntas ni justificaciones</li>
+      <li>Tu satisfacción es nuestra prioridad</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section id="faq">
+  <span class="section-label">Dudas Frecuentes</span>
+  <h2 class="section-title display">Preguntas Frecuentes</h2>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Es acceso vitalicio?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">Sí. Una sola compra y el contenido es tuyo para siempre. Podrás volver cuando quieras, sin mensualidades ni cobros adicionales.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Cómo recibo el material?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">Al completar tu compra recibirás acceso inmediato por correo electrónico. En minutos ya puedes estar cultivando.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Sirve si nunca cultivé nada?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">Fue diseñado exactamente para eso. El método empieza desde cero y te guía paso a paso. No necesitas experiencia previa.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Necesito equipamiento especial?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">No. Con macetas básicas, tierra y semillas (disponibles en cualquier tienda de tu ciudad) ya puedes comenzar.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Funciona en el celular?
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">Sí, 100%. El material está optimizado para celular, tablet y computadora. Cómodo para consultar mientras cuidas tus plantas.</div></div>
+    </div>
+  </div>
+
+  <a href="#purchase" class="btn-main">¡YA ACLARÉ MIS DUDAS, QUIERO COMPRAR!</a>
+  <p class="btn-meta" style="color:#7A7A7A; margin-top:10px;">🔒 Acceso inmediato · Solo $9,90</p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 Mi Jardín en Casa. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  // Date
+  const days = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const now = new Date();
+  document.getElementById('urgency-date').textContent =
+    days[now.getDay()] + ', ' + now.getDate() + ' de ' + months[now.getMonth()];
+
+  // Countdown
+  let total = 12 * 60;
+  function tick() {
+    const h = Math.floor(total / 3600);
+    const m = Math.floor((total % 3600) / 60);
+    const s = total % 60;
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+    if (total > 0) total--;
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // FAQ
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>
